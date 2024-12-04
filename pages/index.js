@@ -104,6 +104,13 @@ export default function Home() {
   const [copyFeedback, setCopyFeedback] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
+  const calculateAge = () => {
+    const birthDate = new Date(2004, 8, 28); // Month is 0-based, so 8 = September
+    const now = new Date();
+    const diff = now - birthDate;
+    return (diff / (1000 * 60 * 60 * 24 * 365.25)).toFixed(2);
+  };
+
   useEffect(() => {
     const handleMouseMove = (e) => {
       setMousePosition({
@@ -199,7 +206,7 @@ export default function Home() {
               currently building <a href="https://www.always.sh/">Always</a>, prev Clubs Program Lead @ <a href="https://www.hackclub.com">Hack Club</a><br/><br/>
               <a href="mailto:thomas@serenidad.app">email me</a> (
               <a href="#" onClick={copyEmail} style={{ cursor: 'copy' }}>thomas@serenidad.app</a>
-              {copyFeedback ? <span className={styles.copyFeedback}> • copied!</span> : ''}) (based in San Francisco)
+              {copyFeedback ? <span className={styles.copyFeedback}> • copied!</span> : ''}) (based in San Francisco & {calculateAge()} years old)
             </p>
             
             <h2 style={{ fontSize: '28px', fontWeight: 500, marginBottom: 32 }}>some cool things I've made</h2>
