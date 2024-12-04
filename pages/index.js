@@ -291,6 +291,36 @@ export default function Home() {
             </div>
             
             <p style={{fontStyle: "italic"}}>~ Thomas<br/>in life we are always learning</p>
+            
+            <div style={{
+              marginTop: 32,
+              display: "flex",
+              gap: 16,
+              opacity: 0.5,
+              fontSize: "14px"
+            }}>
+              <a 
+                href="https://x.com/thomas_hacks" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                twitter
+              </a>
+              <span>•</span>
+              <a 
+                href="https://github.com/serenityux" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                github
+              </a>
+              <span>•</span>
+              <a 
+                href="mailto:thomas@serenidad.app"
+              >
+                email
+              </a>
+            </div>
           </div>
         </div>
       </div>
