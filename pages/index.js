@@ -136,6 +136,13 @@ export default function Home() {
         <title>Thomas Stubblefield</title>
         <meta name="description" content="indie hacker in SF" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        
+        <meta property="og:image" content="https://tompo.dev/selfie.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:title" content="Thomas Stubblefield" />
+        <meta property="og:description" content="indie hacker in SF" />
+        <meta property="og:type" content="website" />
       </Head>
       <div style={{
         position: "relative",
