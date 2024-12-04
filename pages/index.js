@@ -73,7 +73,7 @@ const projects = [
       { label: "try game", url: "https://sidequestvr.com/app/27172/life-of-chai" },
       { label: "demo video", url: "https://youtu.be/FTNr_K-qD2A?si=y6fdPEskJ0HMpm_e" }
     ],
-    image: "lifeofchai.png"
+    image: "lifeOfChai.png"
   },
   {
     title: "take photos of a capybara at a beach & have photos sent to your phone",
