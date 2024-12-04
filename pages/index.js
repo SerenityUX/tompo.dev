@@ -216,7 +216,7 @@ export default function Home() {
               {copyFeedback ? <span className={styles.copyFeedback}> • copied!</span> : ''}) (based in San Francisco & {calculateAge()} years old as of today)
             </p>
             
-            <h2 style={{ fontSize: '28px', fontWeight: 500, marginBottom: 32 }}>some cool things I've made</h2>
+            <h2 style={{ fontSize: '28px', fontWeight: 500, marginBottom: 32 }}>some cool things I've made <span style={{fontSize: 16, opacity: 0.3}}>(with help of friends)</span></h2>
             
             <div style={{
               display: "grid",
