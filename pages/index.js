@@ -254,7 +254,7 @@ export default function Home() {
                       src={project.image} 
                       alt={project.title}
                       style={{
-                        width: "100%",
+                        width: "100%", 
                         height: "auto",
                         display: "block",
                         borderRadius: 'inherit',
@@ -262,7 +262,7 @@ export default function Home() {
                       }}
                     />
                   </a>
-                  <p style={{marginBottom: 8}}>{project.title}</p>
+                  <p style={{marginTop: 12}}>{project.title}</p>
                   <div style={{display: "flex", gap: 16, flexWrap: "wrap"}}>
                     {project.links.map((link, linkIndex) => (
                       <a 
