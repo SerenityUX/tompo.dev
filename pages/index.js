@@ -206,7 +206,7 @@ export default function Home() {
               currently building <a href="https://www.always.sh/">Always</a>, prev Clubs Program Lead @ <a href="https://www.hackclub.com">Hack Club</a><br/><br/>
               <a href="mailto:thomas@serenidad.app">email me</a> (
               <a href="#" onClick={copyEmail} style={{ cursor: 'copy' }}>thomas@serenidad.app</a>
-              {copyFeedback ? <span className={styles.copyFeedback}> • copied!</span> : ''}) (based in San Francisco & {calculateAge()} years old)
+              {copyFeedback ? <span className={styles.copyFeedback}> • copied!</span> : ''}) (based in San Francisco & {calculateAge()} years old as of today)
             </p>
             
             <h2 style={{ fontSize: '28px', fontWeight: 500, marginBottom: 32 }}>some cool things I've made</h2>
