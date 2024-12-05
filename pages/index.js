@@ -45,7 +45,7 @@ const projects = [
   {
     title: "AI anime story-board tool for anime enthusiasts to tell their stories",
     links: [
-      { label: "website", url: "" },
+      { label: "website", url: "https://www.kodan.app/" },
       { label: "documentary", url: "https://youtu.be/H7rV9B03tiw?si=mg4mzYCELTnX8vnz" },
       { label: "launch", url: "https://www.producthunt.com/products/kodan#kodan" }
 
