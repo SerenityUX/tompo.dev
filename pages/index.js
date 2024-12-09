@@ -107,8 +107,16 @@ export default function Home() {
   const calculateAge = () => {
     const birthDate = new Date(2004, 8, 28); // Month is 0-based, so 8 = September
     const now = new Date();
-    const diff = now - birthDate;
-    return (diff / (1000 * 60 * 60 * 24 * 365.25)).toFixed(2);
+    
+    let age = now.getFullYear() - birthDate.getFullYear();
+    const monthDiff = now.getMonth() - birthDate.getMonth();
+    const dayDiff = now.getDate() - birthDate.getDate();
+    
+    // Adjust age if birthday hasn't occurred this year
+    if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+      age--;
+    }
+    return age;
   };
 
   useEffect(() => {
