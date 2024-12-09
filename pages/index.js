@@ -105,18 +105,26 @@ export default function Home() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const calculateAge = () => {
-    const birthDate = new Date(2004, 8, 28); // Month is 0-based, so 8 = September
+    const birthDate = new Date(2004, 8, 28);
     const now = new Date();
     
-    let age = now.getFullYear() - birthDate.getFullYear();
-    const monthDiff = now.getMonth() - birthDate.getMonth();
-    const dayDiff = now.getDate() - birthDate.getDate();
-    
-    // Adjust age if birthday hasn't occurred this year
-    if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
-      age--;
+    // Calculate whole years
+    let years = now.getFullYear() - birthDate.getFullYear();
+    const m = now.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && now.getDate() < birthDate.getDate())) {
+      years--;
     }
-    return age;
+    
+    // Calculate days in current year (accounting for leap years)
+    const isLeapYear = (year) => year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
+    const daysInYear = isLeapYear(now.getFullYear()) ? 366 : 365;
+    
+    // Calculate decimal portion
+    const yearStart = new Date(now.getFullYear(), birthDate.getMonth(), birthDate.getDate());
+    const daysSinceYearStart = (now - yearStart) / (1000 * 60 * 60 * 24);
+    const decimal = daysSinceYearStart / daysInYear;
+    
+    return (years + decimal).toFixed(2);
   };
 
   useEffect(() => {
