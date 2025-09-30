@@ -17,6 +17,7 @@ const geistMono = localFont({
 
 const projects = [
   {
+    name: "Always",
     title: "always up-to-date Run of Show tool for logistically intense events",
     links: [
       { label: "website", url: "https://www.always.sh/" },
@@ -26,6 +27,7 @@ const projects = [
     image: "always.png"
   },
   {
+    name: "Trail",
     title: "7 day hike along the PCT for 30 teenagers to create custom PCBs",
     links: [
       { label: "website", url: "https://trail.hackclub.com/" },
@@ -35,6 +37,7 @@ const projects = [
     image: "trail.png"
   },
   {
+    name: "Summit",
     title: "SF hackathon for 50 Hack Club leaders from around the world",
     links: [
       { label: "website", url: "https://summit.hackclub.com/" },
@@ -43,6 +46,7 @@ const projects = [
     image: "summit.png"
   },
   {
+    name: "Kōdan",
     title: "AI anime story-board tool for anime enthusiasts to tell their stories",
     links: [
       { label: "website", url: "https://www.kodan.app/" },
@@ -53,6 +57,7 @@ const projects = [
     image: "kodan.png"
   },
   {
+    name: "Jams",
     title: "creative workshop platform for teens to learn how to code with friends",
     links: [
       { label: "website", url: "https://jams.hackclub.com/" },
@@ -61,6 +66,7 @@ const projects = [
     image: "jams.png"
   },
   {
+    name: "Bikstar",
     title: "put on a VR headset, get on a bike, and go collect carrots with friends",
     links: [
       { label: "documentary", url: "https://youtu.be/Mcirws6Bh4A?si=Hv6PFB7pgHqu_mpJ" }
@@ -68,6 +74,7 @@ const projects = [
     image: "biking.png"
   },
   {
+    name: "Life of Chai",
     title: "VR story game about a chai vendor and the rate at which time passes",
     links: [
       { label: "try game", url: "https://sidequestvr.com/app/27172/life-of-chai" },
@@ -76,6 +83,7 @@ const projects = [
     image: "lifeOfChai.png"
   },
   {
+    name: "Capybara Beach",
     title: "take photos of a capybara at a beach & have photos sent to your phone",
     links: [
       { label: "try game", url: "https://sidequestvr.com/app/31539/capybara-beach" },
@@ -84,6 +92,7 @@ const projects = [
     image: "capybara.png"
   },
   {
+    name: "Penguin Pair",
     title: "card-paring game with penguins, my first mobile app",
     links: [
       { label: "try game", url: "https://youtu.be/duMuCsHNlLA?si=Z_q8vusqxjSGFVnB" },
@@ -92,6 +101,7 @@ const projects = [
     image: "penguinpair.png"
   },
   {
+    name: "Pizza Grant",
     title: "grant to give teenagers free pizza to start hack clubs at their high school",
     links: [
       { label: "website", url: "https://pizza.hackclub.com/" },
@@ -102,7 +112,12 @@ const projects = [
 
 export default function Home() {
   const [copyFeedback, setCopyFeedback] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [hoveredProject, setHoveredProject] = useState(null);
+  const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 });
+  const [hoverTimeout, setHoverTimeout] = useState(null);
+  const [currentlyHovering, setCurrentlyHovering] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [isAnimatingOut, setIsAnimatingOut] = useState(false);
 
   const calculateAge = () => {
     const birthDate = new Date(2004, 8, 28);
@@ -127,17 +142,6 @@ export default function Home() {
     return (years + decimal).toFixed(2);
   };
 
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      setMousePosition({
-        x: e.clientX,
-        y: e.clientY
-      });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
 
   const copyEmail = (e) => {
     e.preventDefault();
@@ -159,30 +163,59 @@ export default function Home() {
         <meta property="og:title" content="Thomas Stubblefield" />
         <meta property="og:description" content="indie hacker in SF" />
         <meta property="og:type" content="website" />
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            @keyframes popupHeightIn {
+              from {
+                height: 0;
+                width: 0;
+                opacity: 0;
+                transform: translateX(-50%) translateY(-100%) scale(0);
+                transform-origin: bottom center;
+                overflow: hidden;
+              }
+              to {
+                height: auto;
+                width: 320px;
+                opacity: 1;
+                transform: translateX(-50%) translateY(-100%) scale(1);
+                transform-origin: bottom center;
+                overflow: visible;
+              }
+            }
+            @keyframes popupHeightOut {
+              from {
+                height: auto;
+                width: 320px;
+                opacity: 1;
+                transform: translateX(-50%) translateY(-100%) scale(1);
+                transform-origin: bottom center;
+                overflow: visible;
+              }
+              to {
+                height: 0;
+                width: 0;
+                opacity: 0;
+                transform: translateX(-50%) translateY(-100%) scale(0);
+                transform-origin: bottom center;
+                overflow: hidden;
+              }
+            }
+            .popup-animate-in {
+              animation: popupHeightIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            }
+            .popup-animate-out {
+              animation: popupHeightOut 0.25s cubic-bezier(0.55, 0.06, 0.68, 0.19) forwards;
+            }
+          `
+        }} />
       </Head>
       <div style={{
         position: "relative",
         minHeight: "100vh",
         overflow: "hidden",
-        background: `
-          linear-gradient(135deg, rgba(212, 27, 2, 0.05) 0%, transparent 100%),
-          radial-gradient(circle at 100% 0%, rgba(212, 27, 2, 0.08) 0%, transparent 50%),
-          radial-gradient(circle at 0% 100%, rgba(212, 27, 2, 0.08) 0%, transparent 50%),
-          url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)' opacity='0.015'/%3E%3C/svg%3E")
-        `
+        background: "#fff"
       }}>
-        <div
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            pointerEvents: "none",
-            background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(212, 27, 2, 0.08), transparent 40%)`,
-            transition: "background 0.15s ease",
-          }}
-        />
         <div style={{
           display: "flex",
           fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
@@ -224,16 +257,213 @@ export default function Home() {
                 }}
               />
             </a>
-            <h1 style={{ fontSize: '36px', fontWeight: 500, marginBottom: 32 }}>Hey, Thomas here! I'm a designer, developer, organizer, & hacker</h1>
+            <h1 style={{ fontSize: '36px', fontWeight: 500, marginBottom: 32 }}>Hey, welcome to my corner of the internet.</h1>
             <p style={{marginBottom: 32}}>
-              currently building <a href="https://www.always.sh/">Always</a>, prev Clubs Program Lead @ <a href="https://www.hackclub.com">Hack Club</a><br/><br/>
+              Organizing adventures @ <a href="https://www.hackclub.com">Hack Club</a> (HQ-SF)<br/><br/>
               <a href="mailto:thomas@serenidad.app">email me</a> (
               <a href="#" onClick={copyEmail} style={{ cursor: 'copy' }}>thomas@serenidad.app</a>
               {copyFeedback ? <span className={styles.copyFeedback}> • copied!</span> : ''}) (based in San Francisco & {calculateAge()} years old as of today)
             </p>
+                        
+            <div style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 12,
+              marginBottom: 32
+            }}>
+              {projects.map((project, index) => (
+                <a
+                  key={index}
+                  href={project.links[0].url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "inline-block",
+                    padding: "8px 16px",
+                    backgroundColor: "#fff",
+                    color: "#000000",
+                    borderRadius: "20px",
+                    fontSize: "14px",
+                    fontWeight: 500,
+                    border: "1px solid #000000",
+                    transition: "all 0.2s ease",
+                    cursor: "pointer",
+                    textDecoration: "none"
+                  }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.color = "#D41B02";
+                    e.currentTarget.style.borderColor = "#D41B02";
+                    
+                    // Clear any existing timeout
+                    if (hoverTimeout) {
+                      clearTimeout(hoverTimeout);
+                      setHoverTimeout(null);
+                    }
+                    
+                    setCurrentlyHovering(true);
+                    setHoveredProject(project);
+                    setIsAnimating(true);
+                    setIsAnimatingOut(false);
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    setPopupPosition({
+                      x: rect.left + rect.width / 2,
+                      y: rect.top - 8
+                    });
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.color = "#000000";
+                    e.currentTarget.style.borderColor = "#000000";
+                    
+                    setCurrentlyHovering(false);
+                    // Set timeout to hide popup after 1 second
+                    const timeout = setTimeout(() => {
+                      if (!currentlyHovering) {
+                        setIsAnimating(false);
+                        setIsAnimatingOut(true);
+                        setTimeout(() => setHoveredProject(null), 250); // Wait for animation to complete
+                      }
+                    }, 1000);
+                    setHoverTimeout(timeout);
+                  }}
+                >
+                  {project.name}
+                </a>
+              ))}
+            </div>
             
-            <h2 style={{ fontSize: '28px', fontWeight: 500, marginBottom: 32 }}>some cool things I've made <span style={{fontSize: 16, opacity: 0.3}}>(with help of friends)</span></h2>
-            
+            {/* Project Popup */}
+            {(hoveredProject && currentlyHovering) && (
+              <div
+                className={isAnimating ? "popup-animate-in" : isAnimatingOut ? "popup-animate-out" : ""}
+                style={{
+                  position: "fixed",
+                  left: popupPosition.x,
+                  top: popupPosition.y,
+                  transform: "translateX(-50%) translateY(-100%)",
+                  zIndex: 1000,
+                  backgroundColor: "#fff",
+                  border: "2px solid #000",
+                  borderRadius: "6px",
+                  padding: "12px",
+                  maxWidth: "320px",
+                  width: "320px",
+                  fontSize: "13px",
+                  lineHeight: "1.4"
+                }}
+                onMouseOver={() => {
+                  // Clear timeout when hovering over popup
+                  if (hoverTimeout) {
+                    clearTimeout(hoverTimeout);
+                    setHoverTimeout(null);
+                  }
+                  setCurrentlyHovering(true);
+                  setIsAnimating(true);
+                  setIsAnimatingOut(false);
+                }}
+                onMouseOut={() => {
+                  setCurrentlyHovering(false);
+                  // Set timeout to hide popup after 1 second
+                  const timeout = setTimeout(() => {
+                    if (!currentlyHovering) {
+                      setIsAnimating(false);
+                      setIsAnimatingOut(true);
+                      setTimeout(() => setHoveredProject(null), 250); // Wait for animation to complete
+                    }
+                  }, 1000);
+                  setHoverTimeout(timeout);
+                }}
+              >
+                {/* Triangle pointer */}
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: "-6px",
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    width: "0",
+                    height: "0",
+                    borderLeft: "6px solid transparent",
+                    borderRight: "6px solid transparent",
+                    borderTop: "6px solid #fff"
+                  }}
+                />
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: "-7px",
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    width: "0",
+                    height: "0",
+                    borderLeft: "7px solid transparent",
+                    borderRight: "7px solid transparent",
+                    borderTop: "7px solid #000"
+                  }}
+                />
+                <div style={{ display: "flex", gap: "10px", marginBottom: "8px" }}>
+                  <img
+                    src={hoveredProject.image}
+                    alt={hoveredProject.title}
+                    style={{
+                      width: "120px",
+                      height: "68px",
+                      objectFit: "cover",
+                      borderRadius: "4px",
+                      flexShrink: 0
+                    }}
+                  />
+                  <div style={{ flex: 1 }}>
+                    <div style={{
+                      fontWeight: "600",
+                      fontSize: "14px",
+                      color: "#000",
+                      marginBottom: "4px"
+                    }}>
+                      {hoveredProject.name}
+                    </div>
+                    <div style={{
+                      fontSize: "12px",
+                      color: "#666",
+                      lineHeight: "1.3"
+                    }}>
+                      {hoveredProject.title}
+                    </div>
+                  </div>
+                </div>
+                <div style={{ 
+                  display: "flex", 
+                  flexWrap: "wrap", 
+                  gap: "8px",
+                  borderTop: "1px solid #eee",
+                  paddingTop: "8px"
+                }}>
+                  {hoveredProject.links.map((link, linkIndex) => (
+                    <a
+                      key={linkIndex}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        color: "#D41B02",
+                        textDecoration: "none",
+                        fontSize: "12px",
+                        padding: "2px 6px",
+                        transition: "text-decoration 0.2s ease"
+                      }}
+                      onMouseOver={(e) => {
+                        e.currentTarget.style.textDecoration = "underline";
+                      }}
+                      onMouseOut={(e) => {
+                        e.currentTarget.style.textDecoration = "none";
+                      }}
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+{/*             
             <div style={{
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
@@ -304,7 +534,7 @@ export default function Home() {
                   </div>
                 </div>
               ))}
-            </div>
+            </div> */}
             
             <p style={{fontStyle: "italic"}}>~ Thomas<br/>in life we are always learning</p>
             
