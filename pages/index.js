@@ -107,6 +107,45 @@ const projects = [
       { label: "website", url: "https://pizza.hackclub.com/" },
     ],
     image: "pizza.png"
+  },
+  {
+    name: "Juice",
+    title: "Pop-up gaming cafe in Shanghai for 100 students to make their first games",
+    links: [
+      { label: "website", url: "https://juice.hackclub.com/" },
+      {
+        label: "video",
+        url: "https://youtube.com/playlist?list=PLbNbddgD-XxH0TDS6qFynB6-YnWZU5Fhc&si=zFrFR_OVO4mphdp8"
+      }
+    ],
+    image: "file.svg"
+  },
+  {
+    name: "Neighborhood",
+    title: "Teen summer hacker houses in SF (6 weeks, 75 builders across 4 houses)",
+    links: [
+      { label: "website", url: "https://neighborhood.hackclub.com/" },
+      { label: "video", url: "https://youtu.be/ehH_52fzStw?si=wtpTTbNqvWKWjVx0" }
+    ],
+    image: "file.svg"
+  },
+  {
+    name: "Shiba",
+    title: "Handmade arcade in Tokyo for 30 teens to build custom machines on-site",
+    links: [
+      { label: "website", url: "https://shiba.hackclub.com/" },
+      { label: "video", url: "https://youtu.be/kkbf092Los0?si=Q1moTQncG2fmcO3G" }
+    ],
+    image: "file.svg"
+  },
+  {
+    name: "NCC Dali",
+    title: "Co-create hackathon in Dali, China (weekend event with 40 local participants)",
+    links: [
+      { label: "event", url: "https://www.cocreate.cafe/Dalifornia" },
+      { label: "video", url: "https://youtu.be/hGF72Ox--EY" }
+    ],
+    image: "file.svg"
   }
 ];
 
@@ -119,30 +158,7 @@ export default function Home() {
   const [isAnimating, setIsAnimating] = useState(false);
   const [isAnimatingOut, setIsAnimatingOut] = useState(false);
 
-  const calculateAge = () => {
-    const birthDate = new Date(2004, 8, 28);
-    const now = new Date();
-    
-    // Calculate whole years
-    let years = now.getFullYear() - birthDate.getFullYear();
-    const m = now.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && now.getDate() < birthDate.getDate())) {
-      years--;
-    }
-    
-    // Calculate days in current year (accounting for leap years)
-    const isLeapYear = (year) => year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
-    const daysInYear = isLeapYear(now.getFullYear()) ? 366 : 365;
-    
-    // Calculate decimal portion
-    const yearStart = new Date(now.getFullYear(), birthDate.getMonth(), birthDate.getDate());
-    const daysSinceYearStart = (now - yearStart) / (1000 * 60 * 60 * 24);
-    const decimal = daysSinceYearStart / daysInYear;
-    
-    return (years + decimal).toFixed(2);
-  };
-
-
+  
   const copyEmail = (e) => {
     e.preventDefault();
     navigator.clipboard.writeText('thomas@serenidad.app');
@@ -259,10 +275,10 @@ export default function Home() {
             </a>
             <h1 style={{ fontSize: '36px', fontWeight: 500, marginBottom: 32 }}>Hey, welcome to my corner of the internet.</h1>
             <p style={{marginBottom: 32}}>
-              Organizing adventures @ <a href="https://www.hackclub.com">Hack Club</a> (HQ-SF)<br/><br/>
+              Prev @ <a href="https://www.hackclub.com">Hack Club</a> (HQ-SF)<br/><br/>
               <a href="mailto:thomas@serenidad.app">email me</a> (
               <a href="#" onClick={copyEmail} style={{ cursor: 'copy' }}>thomas@serenidad.app</a>
-              {copyFeedback ? <span className={styles.copyFeedback}> • copied!</span> : ''}) (based in San Francisco & {calculateAge()} years old as of today)
+              {copyFeedback ? <span className={styles.copyFeedback}> • copied!</span> : ''}) (based in San Francisco & I'm just 21)
             </p>
                         
             <div style={{
