@@ -17,6 +17,41 @@ const geistMono = localFont({
 
 const projects = [
   {
+    name: "Juice",
+    title: "Pop-up gaming cafe in Shanghai for 100 students to make their first games",
+    links: [
+      { label: "website", url: "https://juice.hackclub.com/" },
+      {
+        label: "video",
+        url: "https://youtube.com/playlist?list=PLbNbddgD-XxH0TDS6qFynB6-YnWZU5Fhc&si=zFrFR_OVO4mphdp8"
+      }
+    ]
+  },
+  {
+    name: "Neighborhood",
+    title: "Teen summer hacker houses in SF (6 weeks, 75 builders across 4 houses)",
+    links: [
+      { label: "website", url: "https://neighborhood.hackclub.com/" },
+      { label: "video", url: "https://youtu.be/ehH_52fzStw?si=wtpTTbNqvWKWjVx0" }
+    ]
+  },
+  {
+    name: "Shiba",
+    title: "Handmade arcade in Tokyo for 30 teens to build custom machines on-site",
+    links: [
+      { label: "website", url: "https://shiba.hackclub.com/" },
+      { label: "video", url: "https://youtu.be/kkbf092Los0?si=Q1moTQncG2fmcO3G" }
+    ]
+  },
+  {
+    name: "NCC Dali",
+    title: "Co-create hackathon in Dali, China (weekend event with 40 local participants)",
+    links: [
+      { label: "event", url: "https://www.cocreate.cafe/Dalifornia" },
+      { label: "video", url: "https://youtu.be/hGF72Ox--EY" }
+    ]
+  },
+  {
     name: "Always",
     title: "always up-to-date Run of Show tool for logistically intense events",
     links: [
@@ -107,45 +142,6 @@ const projects = [
       { label: "website", url: "https://pizza.hackclub.com/" },
     ],
     image: "pizza.png"
-  },
-  {
-    name: "Juice",
-    title: "Pop-up gaming cafe in Shanghai for 100 students to make their first games",
-    links: [
-      { label: "website", url: "https://juice.hackclub.com/" },
-      {
-        label: "video",
-        url: "https://youtube.com/playlist?list=PLbNbddgD-XxH0TDS6qFynB6-YnWZU5Fhc&si=zFrFR_OVO4mphdp8"
-      }
-    ],
-    image: "file.svg"
-  },
-  {
-    name: "Neighborhood",
-    title: "Teen summer hacker houses in SF (6 weeks, 75 builders across 4 houses)",
-    links: [
-      { label: "website", url: "https://neighborhood.hackclub.com/" },
-      { label: "video", url: "https://youtu.be/ehH_52fzStw?si=wtpTTbNqvWKWjVx0" }
-    ],
-    image: "file.svg"
-  },
-  {
-    name: "Shiba",
-    title: "Handmade arcade in Tokyo for 30 teens to build custom machines on-site",
-    links: [
-      { label: "website", url: "https://shiba.hackclub.com/" },
-      { label: "video", url: "https://youtu.be/kkbf092Los0?si=Q1moTQncG2fmcO3G" }
-    ],
-    image: "file.svg"
-  },
-  {
-    name: "NCC Dali",
-    title: "Co-create hackathon in Dali, China (weekend event with 40 local participants)",
-    links: [
-      { label: "event", url: "https://www.cocreate.cafe/Dalifornia" },
-      { label: "video", url: "https://youtu.be/hGF72Ox--EY" }
-    ],
-    image: "file.svg"
   }
 ];
 
@@ -417,17 +413,19 @@ export default function Home() {
                   }}
                 />
                 <div style={{ display: "flex", gap: "10px", marginBottom: "8px" }}>
-                  <img
-                    src={hoveredProject.image}
-                    alt={hoveredProject.title}
-                    style={{
-                      width: "120px",
-                      height: "68px",
-                      objectFit: "cover",
-                      borderRadius: "4px",
-                      flexShrink: 0
-                    }}
-                  />
+                  {hoveredProject.image && (
+                    <img
+                      src={hoveredProject.image}
+                      alt={hoveredProject.title}
+                      style={{
+                        width: "120px",
+                        height: "68px",
+                        objectFit: "cover",
+                        borderRadius: "4px",
+                        flexShrink: 0
+                      }}
+                    />
+                  )}
                   <div style={{ flex: 1 }}>
                     <div style={{
                       fontWeight: "600",
