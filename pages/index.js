@@ -339,7 +339,10 @@ const POST_FRISBEE_NAV_ITEMS = [
   "Past Work",
   "Writing",
   "Contact",
+  "Frisbee",
 ];
+
+const POST_FRISBEE_LUMA_FRISBEE_EVENT = "https://luma.com/wc0dofru";
 
 const CONTACT_EMAIL = "thomas@serenidad.app";
 const CONTACT_GMAIL_COMPOSE = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(CONTACT_EMAIL)}`;
@@ -546,6 +549,12 @@ export default function Home() {
   const prevFramePhaseKeyRef = useRef(null);
   const prevFrisbeeFrameRef = useRef(0);
   const [postFrisbeeMenu, setPostFrisbeeMenu] = useState(false);
+  /**
+   * Keyboard-style “selected” row on the main post-frisbee nav only when a fine pointer is
+   * primary (desktop / trackpad). On touch, tapping does not need a default highlighted row.
+   */
+  const [postFrisbeeMainNavKbdSelected, setPostFrisbeeMainNavKbdSelected] =
+    useState(false);
   /** Focused “button” index within main menu or the active subview (0 = first row, usually back in subviews). */
   const [postFrisbeeFocusIndex, setPostFrisbeeFocusIndex] = useState(0);
   const [postFrisbeeSubView, setPostFrisbeeSubView] = useState(null);
@@ -1114,6 +1123,15 @@ export default function Home() {
   }, [postFrisbeeMenu]);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia("(pointer: fine)");
+    const sync = () => setPostFrisbeeMainNavKbdSelected(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
+  useEffect(() => {
     if (!postFrisbeeMenu) {
       setPostFrisbeeSubView(null);
       return;
@@ -1421,6 +1439,8 @@ export default function Home() {
           setPostFrisbeeSubView("writing");
         } else if (postFrisbeeFocusIndex === 3) {
           setPostFrisbeeSubView("contact");
+        } else if (postFrisbeeFocusIndex === 4) {
+          openRepo(POST_FRISBEE_LUMA_FRISBEE_EVENT);
         }
         return;
       }
@@ -2088,7 +2108,10 @@ export default function Home() {
                   <li key={label}>
                     <PostFrisbeeKbdButton
                       line
-                      selected={postFrisbeeFocusIndex === i}
+                      selected={
+                        postFrisbeeMainNavKbdSelected &&
+                        postFrisbeeFocusIndex === i
+                      }
                       onClick={() => {
                         setPostFrisbeeFocusIndex(i);
                         if (i === 0) {
@@ -2100,6 +2123,12 @@ export default function Home() {
                           setPostFrisbeeSubView("writing");
                         } else if (i === 3) {
                           setPostFrisbeeSubView("contact");
+                        } else if (i === 4) {
+                          window.open(
+                            POST_FRISBEE_LUMA_FRISBEE_EVENT,
+                            "_blank",
+                            "noopener,noreferrer",
+                          );
                         }
                       }}
                     >
