@@ -21,8 +21,7 @@ export default function NextAdventure() {
       </p>
       <p>Hey, Thomas here.</p>
       <p>
-        Today I am embarking on a new journey. I&apos;m joining {vvd} as Founding
-        Engineer.
+        Today I am embarking on a new journey. I&apos;m joining the {vvd} team
       </p>
       <p>
         I imagine technology that listens to our narrative worlds (understands
@@ -31,12 +30,12 @@ export default function NextAdventure() {
         media.
       </p>
       <p>
-        Today, {vvd} is home to thousands of TTRPG storytellers, indie game
+        Today, {vvd} is home to TTRPG storytellers, indie game
         developers, and authors.
       </p>
       <p>
         One day, I envision {vvd} becoming a more powerful tool for these
-        creatives, but also serving millions of teams that produce films, novels,
+        creatives, but also serving teams that produce films, novels,
         and games. {vvd} will be the surface where creatives can nautrally structure world
         data and have that data easily ingested
         by both people and the tools they use.
