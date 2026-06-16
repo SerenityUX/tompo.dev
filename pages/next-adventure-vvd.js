@@ -36,8 +36,8 @@ export default function NextAdventure() {
       </p>
       <p>
         One day, I envision {vvd} becoming a more powerful tool for these
-        creatives, but also serving millions of teams that produce films, games,
-        and novels. {vvd} will be the surface where creatives can nautrally structure world
+        creatives, but also serving millions of teams that produce films, novels,
+        and games. {vvd} will be the surface where creatives can nautrally structure world
         data and have that data easily ingested
         by both people and the tools they use.
       </p>
