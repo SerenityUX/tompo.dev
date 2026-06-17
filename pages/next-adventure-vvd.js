@@ -51,7 +51,7 @@ export default function NextAdventure() {
       </p>
       <p>
         After meeting the team and working with them to build out a new feature on
-        the product, I felt this was the place and the team where we can build
+        the product, I felt this was the product and the team where we can build
         technology that fundamentally changes the way we tell stories and what we
         can do with the stories we tell.
       </p>
