@@ -7,6 +7,12 @@ const vvd = (
   </a>
 );
 
+const cocreate = (
+  <a href="https://cocreate.cafe" style={{ textDecoration: "underline dotted" }}>
+    cocreate
+  </a>
+);
+
 export default function NextAdventure() {
   return (
     <>
@@ -21,28 +27,59 @@ export default function NextAdventure() {
       </p>
       <p>Hey, Thomas here.</p>
       <p>
-        Today I am embarking on a new journey. I&apos;m joining the {vvd} team
+        Today I am embarking on a new journey. I&apos;m joining {vvd} as Founding
+        Engineer.
       </p>
       <p>
-        I imagine technology that listens to our narrative worlds (understands
-        timelines, characters, places, etc.) and gives us structured data we can
-        use to develop these worlds into many different forms of interactive
-        media.
+        I came across {vvd} while I was building {cocreate}, searching for
+        inspiration.
       </p>
       <p>
-        Today, {vvd} is home to TTRPG storytellers, indie game
-        developers, and authors.
+        I landed on the idea that almost every new interface is an old interface
+        upgraded by today&apos;s technology. When it comes to storytelling (the
+        focus of {cocreate}), there are few interfaces older than writing out the
+        story that&apos;s in your mind—just words on a document. It&apos;s
+        intuitive to most of us, and we&apos;ve been writing since we were young,
+        so naturally it felt like a good interface for the storytelling tool I was
+        building.
+      </p>
+      <p>
+        I started studying {vvd}—notebook in hand, going through the experience
+        of making my world and noting what felt good. As I was trying the tool, I
+        started to feel it was something really special, so I reached out to the
+        people building it.
+      </p>
+      <p>
+        After meeting the team and working with them to build out a new feature on
+        the product, I felt this was the place and the team where we can build
+        technology that fundamentally changes the way we tell stories and what we
+        can do with the stories we tell.
+      </p>
+      <p>
+        Today {vvd} is used primarily by TTRPG players, small game studios, and
+        authors as a world bible—storing all the artifacts visually and letting
+        them draw relationships between them.
       </p>
       <p>
         One day, I envision {vvd} becoming a more powerful tool for these
-        creatives, but also serving teams that produce films, novels,
-        and games. {vvd} will be the surface where creatives can nautrally structure world
-        data and have that data easily ingested
-        by both people and the tools they use.
+        creatives, but also serving larger teams that produce films, games, and
+        books. It will be easy to get your data out of your {vvd} world and into
+        a product folks can actually use.
       </p>
       <p>
-        I look forward to making it happen and grateful to be doing it alongside
-        creative, kind, and skilled folks: Zied (co-founder), Haseeb
+        {vvd} will be the surface where creatives can structure world data in a
+        way that feels natural to their process and is easily ingested by both
+        people they work with and the tools they use.
+      </p>
+      <p>
+        I imagine this technology will listen to creatives as they express their
+        ideas for narrative worlds (understanding timelines, characters, places,
+        etc.) and output structured data they can use to develop these worlds into
+        many different forms of interactive media.
+      </p>
+      <p>
+        I look forward to making it happen and am extremely grateful to be doing
+        it alongside creative, kind, and skilled folks: Zied (co-founder), Haseeb
         (co-founder), and Felicia (Head of Growth).
       </p>
       <p>Let&apos;s see where this adventure leads.</p>
